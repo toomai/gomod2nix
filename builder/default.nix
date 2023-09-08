@@ -32,7 +32,11 @@ let
           inherit (pkgsBuildBuild.go) GOOS GOARCH;
           nativeBuildInputs = [ pkgsBuildBuild.go ];
         } ''
-        export HOME=$(mktemp -d)
+          export HOME=$(mktemp -d)
+
+          echo "DEBUG"
+          go version
+
         go build -o $out ${src}
       '';
     in
