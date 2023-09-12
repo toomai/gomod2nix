@@ -339,6 +339,9 @@ let
               flags+=($checkFlags)
             fi
 
+            echo "DEBUG GO VERSION"
+            go version
+
             local OUT
             if ! OUT="$(go $cmd "''${flags[@]}" $dir 2>&1)"; then
               if echo "$OUT" | grep -qE 'imports .*?: no Go files in'; then
