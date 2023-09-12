@@ -152,7 +152,7 @@ let
     in
     (
       if goAttrs != [ ]
-      then buildPackages.${goAttr}
+      then throw buildPackages.${goAttr}
       else throw "go.mod specified Go version ${goVersion}, but no compatible Go attribute could be found."
     )
   ));
@@ -324,6 +324,8 @@ let
           buildGoDir() {
             local cmd="$1" dir="$2"
 
+            echo "DEBUG $cmd $dir"
+
             . $TMPDIR/buildFlagsArray
 
             declare -a flags
@@ -380,6 +382,8 @@ let
             echo "Building subPackage $pkg"
             buildGoDir install "$pkg"
           done
+          echo "Build finished"
+
         '' + optionalString (stdenv.hostPlatform != stdenv.buildPlatform) ''
           # normalize cross-compiled builds w.r.t. native builds
           (
