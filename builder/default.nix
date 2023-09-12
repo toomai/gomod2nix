@@ -142,7 +142,7 @@ let
   selectGo = attrs: goMod: attrs.go or (if goMod == null then buildPackages.go else
   (
     let
-      goVersion = goMod.go;
+      goVersion = throw "go version ${goMod.go}";
       goAttrs = lib.reverseList (builtins.filter
         (
           attr: lib.hasPrefix "go_" attr && lib.versionAtLeast buildPackages.${attr}.version goVersion
