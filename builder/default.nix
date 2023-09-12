@@ -152,7 +152,7 @@ let
     in
     (
       if goAttrs != [ ]
-      then throw buildPackages.${goAttr}
+      then buildPackages.${goAttr}
       else throw "go.mod specified Go version ${goVersion}, but no compatible Go attribute could be found."
     )
   ));
